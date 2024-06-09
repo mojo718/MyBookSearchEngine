@@ -1,37 +1,9 @@
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import App from './App.jsx';
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
-
-import { setContext } from '@apollo/client/link/context';
-
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
-
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import App from './App.jsx'
+import SearchBooks from './pages/SearchBooks'
+import SavedBooks from './pages/SavedBooks'
 
 const router = createBrowserRouter([
   {
@@ -41,18 +13,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SearchBooks />,
-      },
-      {
+        element: <SearchBooks />
+      }, {
         path: '/saved',
-        element: <SavedBooks />,
-      },
-    ],
-  },
-]);
+        element: <SavedBooks />
+      }
+    ]
+  }
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ApolloProvider client={client}>
-    <RouterProvider router={router} />
-  </ApolloProvider>
-);
+  <RouterProvider router={router} />
+)

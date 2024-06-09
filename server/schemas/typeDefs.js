@@ -1,15 +1,8 @@
-const { gql } = require('apollo-server-express');
+// Schemas to allow access to data when data is fetched from database
 
-const typeDefs = gql`
-  type Book {
-    bookId: String!
-    authors: [String]
-    description: String!
-    title: String!
-    image: String
-    link: String
-  }
+// Queries and Mutations are allowed commands that the resolver will then use to fetch the appropriate data
 
+const typeDefs = `
   type User {
     _id: ID!
     username: String!
@@ -18,30 +11,32 @@ const typeDefs = gql`
     savedBooks: [Book]
   }
 
+  type Book {
+    _id: ID!
+    authors: [String]!
+    description: String!
+    bookId: String!
+    image: String
+    link: String
+    title: String!
+  }
+
   type Auth {
     token: ID!
     user: User
   }
 
   type Query {
+    users: [User]
     me: User
-  }
-
-  input BookInput {
-    bookId: String!
-    authors: [String]
-    description: String!
-    title: String!
-    image: String
-    link: String
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
-    saveBook(book: BookInput!): User
+    createUser(username: String! email: String!, password: String!): Auth
+    saveBook(authors: [String]!, description: String!, title: String!, bookId: String!, image: String, link: String): User
     removeBook(bookId: String!): User
   }
 `;
 
-module.exports = typeDefs;
+module.exports = typeDefs

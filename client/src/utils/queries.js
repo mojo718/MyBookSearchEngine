@@ -1,5 +1,8 @@
 import { gql } from '@apollo/client';
 
+// Graphql code to fetch user information
+// On server side, user token will be taken from header to use when fetching data
+
 export const GET_ME = gql`
   query me {
     me {
@@ -8,10 +11,11 @@ export const GET_ME = gql`
       email
       bookCount
       savedBooks {
+        _id
         bookId
+        title
         authors
         description
-        title
         image
         link
       }
