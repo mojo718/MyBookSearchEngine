@@ -36,5 +36,4 @@ Ben Montijo
 ## Questions 🙋
 If there are any questions, feel free to contact my email at: mojo718@yahoo.com
 
-
-You can also find me on GitHub at: [PawFolio](https://www.github.com/PawFolio)
+You can also find me on GitHub at:  https://github.com/mojo718
