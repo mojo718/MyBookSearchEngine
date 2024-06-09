@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 const SignupForm = () => {
+    // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+    // set state for form validation
   const [validated, setValidated] = useState(false);
+    // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+    //add addUser variable to useMutation ADD_USER
   const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
@@ -17,7 +21,8 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+  // check if form has everything (as per react-bootstrap docs)
+  //breaking here.  Dont know why :(
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
